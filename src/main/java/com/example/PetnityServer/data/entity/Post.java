@@ -53,7 +53,7 @@ public class Post {
 
     public Post() {}
 
-    public Post(String password, String salt, String title, String message, Short dogAge, String dogName, String location, LocalDateTime createdAt, LocalDateTime updateAt) {
+    public Post(String password, String salt, String title, String message, Short dogAge, String dogName, String location, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.password = password;
         this.salt = salt;
         this.title = title;
@@ -62,7 +62,7 @@ public class Post {
         this.dogName = dogName;
         this.location = location;
         this.createdAt = createdAt;
-        this.updatedAt = updateAt;
+        this.updatedAt = updatedAt;
     }
 
     // Getters and Setters
@@ -143,7 +143,7 @@ public class Post {
         return updatedAt;
     }
 
-    public void setUpdateAt(LocalDateTime updateAt) {
-        this.updatedAt = updateAt;
+    public void setUpdateAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
