@@ -41,13 +41,13 @@ public class Post {
     @Column(nullable = true, length = 50)
     private String location;
     //@CreationTimestamp annotation is used to update the created_at column
-    @Column(name = "created_at", nullable = false)
+    @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
     //@UpdateTimestamp annotation is used to update the update_at column
-    @Column(name = "update_at", nullable = false)
+    @Column(nullable = false)
     @UpdateTimestamp
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
 
     // Constructors, Getters, and Setters
 
