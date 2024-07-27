@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.PetnityServer.PetnityServerApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-07-20T10:08:44" hostname="JaeJun" time="23.968">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.example.PetnityServer.PetnityServerApplicationTests" time="23.968"/>
+  <system-out><![CDATA[19:07:55.237 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.PetnityServer.PetnityServerApplicationTests]: PetnityServerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:07:59.112 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.PetnityServer.PetnityServerApplication for test class com.example.PetnityServer.PetnityServerApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.1)
+
+2024-07-20T19:08:10.557+09:00  INFO 10860 --- [PetnityServer] [    Test worker] c.e.P.PetnityServerApplicationTests      : Starting PetnityServerApplicationTests using Java 17.0.11 with PID 10860 (started by lecile111 in /mnt/c/Users/JaeJunLee/Desktop/PetnityServer/PetnityServer/PetnityServer)
+2024-07-20T19:08:10.574+09:00  INFO 10860 --- [PetnityServer] [    Test worker] c.e.P.PetnityServerApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2024-07-20T19:08:44.018+09:00  INFO 10860 --- [PetnityServer] [    Test worker] c.e.P.PetnityServerApplicationTests      : Started PetnityServerApplicationTests in 39.72 seconds (process running for 62.844)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
