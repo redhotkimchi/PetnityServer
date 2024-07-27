@@ -1,11 +1,20 @@
 package com.example.PetnityServer.data.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "postTable")
-public class PostsEntity {
+//message, title columns are indexed
+@Table(name = "post",
+        indexes = {@Index(name = "idx_title",  columnList="title"),
+                @Index(name = "idx_message", columnList="message"),
+                }
+)
+//class name has been changed to Post
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,27 +31,29 @@ public class PostsEntity {
 
     @Column(nullable = false)
     private String message;
-
-    @Column(nullable = false)
+    //dogAge column is nullable
+    @Column(nullable = true)
     private Integer dogAge;
 
     @Column(nullable = false, length = 25)
     private String dogName;
-
-    @Column(nullable = false, length = 50)
+    //location column is nullable
+    @Column(nullable = true, length = 50)
     private String location;
-
+    //@CreationTimestamp annotation is used to update the created_at column
     @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
     private LocalDateTime createdAt;
-
+    //@UpdateTimestamp annotation is used to update the update_at column
     @Column(name = "update_at", nullable = false)
+    @UpdateTimestamp
     private LocalDateTime updateAt;
 
     // Constructors, Getters, and Setters
 
-    public PostsEntity() {}
+    public Post() {}
 
-    public PostsEntity(String password, String salt, String title, String message, Integer dogAge, String dogName, String location, LocalDateTime createdAt, LocalDateTime updateAt) {
+    public Post(String password, String salt, String title, String message, Integer dogAge, String dogName, String location, LocalDateTime createdAt, LocalDateTime updateAt) {
         this.password = password;
         this.salt = salt;
         this.title = title;

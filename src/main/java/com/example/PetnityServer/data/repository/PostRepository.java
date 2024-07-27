@@ -1,9 +1,9 @@
 package com.example.PetnityServer.data.repository;
 
-import com.example.PetnityServer.data.entity.PostsEntity;
+import com.example.PetnityServer.data.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PostsRepository extends JpaRepository<PostsEntity, Long> {
+public interface PostRepository extends JpaRepository<Post, Long> {
 }
