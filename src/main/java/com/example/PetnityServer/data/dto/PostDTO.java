@@ -9,7 +9,7 @@ public class PostDTO {
         @Getter
         @AllArgsConstructor
         @Builder
-        public static class Create {
+        public static class CreateAndUpdate {
             private String password;
             private String title;
             private String message;
@@ -18,17 +18,7 @@ public class PostDTO {
             private String location;
         }
 
-        @Getter
-        @AllArgsConstructor
-        @Builder
-        public static class Update {
-            //private String password;
-            private String title;
-            private String message;
-            private Short dogAge;
-            private String dogName;
-            private String location;
-        }
+
         public static class Delete {
             @Getter
             @AllArgsConstructor
