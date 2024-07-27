@@ -33,7 +33,7 @@ public class Post {
     private String message;
     //dogAge column is nullable
     @Column(nullable = true)
-    private Integer dogAge;
+    private Short dogAge;
 
     @Column(nullable = false, length = 25)
     private String dogName;
@@ -53,7 +53,7 @@ public class Post {
 
     public Post() {}
 
-    public Post(String password, String salt, String title, String message, Integer dogAge, String dogName, String location, LocalDateTime createdAt, LocalDateTime updateAt) {
+    public Post(String password, String salt, String title, String message, Short dogAge, String dogName, String location, LocalDateTime createdAt, LocalDateTime updateAt) {
         this.password = password;
         this.salt = salt;
         this.title = title;
@@ -62,7 +62,7 @@ public class Post {
         this.dogName = dogName;
         this.location = location;
         this.createdAt = createdAt;
-        this.updateAt = updateAt;
+        this.updatedAt = updateAt;
     }
 
     // Getters and Setters
@@ -107,11 +107,11 @@ public class Post {
         this.message = message;
     }
 
-    public Integer getDogAge() {
+    public Short getDogAge() {
         return dogAge;
     }
 
-    public void setDogAge(Integer dogAge) {
+    public void setDogAge(Short dogAge) {
         this.dogAge = dogAge;
     }
 
@@ -140,10 +140,10 @@ public class Post {
     }
 
     public LocalDateTime getUpdateAt() {
-        return updateAt;
+        return updatedAt;
     }
 
     public void setUpdateAt(LocalDateTime updateAt) {
-        this.updateAt = updateAt;
+        this.updatedAt = updateAt;
     }
 }
