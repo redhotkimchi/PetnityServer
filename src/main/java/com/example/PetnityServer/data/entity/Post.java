@@ -60,4 +60,5 @@ public class Post {
 
     public Post() {
     }
+
 }
