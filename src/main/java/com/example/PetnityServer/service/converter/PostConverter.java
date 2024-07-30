@@ -21,15 +21,14 @@ public class PostConverter {
                 .build();
     }
 
-    public static Post convertToEntity(CreatePostRequestDTO createPostRequestDTO) {
+    public static Post convertToEntity(PostDTO postDTO) {
         return Post.builder()
-                .title(createPostRequestDTO.getPost().getTitle())
-                .message(createPostRequestDTO.getPost().getMessage())
-                .dogName(createPostRequestDTO.getPost().getDogName())
-                .dogAge(createPostRequestDTO.getPost().getDogAge())
-                .nickname(createPostRequestDTO.getPost().getNickname())
-                .location(createPostRequestDTO.getPost().getLocation())
-                .password(createPostRequestDTO.getPassword())
+                .title(postDTO.getTitle())
+                .message(postDTO.getMessage())
+                .dogAge(postDTO.getDogAge())
+                .dogName(postDTO.getDogName())
+                .location(postDTO.getLocation())
+                .nickname(postDTO.getNickname())
                 .build();
     }
 

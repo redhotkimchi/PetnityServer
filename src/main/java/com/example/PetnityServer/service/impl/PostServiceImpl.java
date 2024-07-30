@@ -25,7 +25,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO createPost(CreatePostRequestDTO createPostRequestDTO) {
-        Post post = postRepository.save(postConverter.convertToEntity(createPostRequestDTO));
+        String password = createPostRequestDTO.getPassword();
+        Post post = postRepository.save(postConverter.convertToEntity(createPostRequestDTO.getPost()));
         return postConverter.convertToDto(post);
 
     }
