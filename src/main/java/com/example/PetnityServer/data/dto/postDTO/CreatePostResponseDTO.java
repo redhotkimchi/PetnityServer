@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ResponsePostDTO {
-    PostDTO postDTO;
+public class CreatePostResponseDTO {
+    PostDTO post;
 }

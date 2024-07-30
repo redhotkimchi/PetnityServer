@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 @Getter
 @Builder
-public class ListPostResponseDTO {
-    private List<PostDTO> postDTOList;
+public class ListPostsResponseDTO {
+    private List<PostDTO> posts;
     private int totalPostCount;
 }
