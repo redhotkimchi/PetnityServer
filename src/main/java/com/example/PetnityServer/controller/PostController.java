@@ -3,6 +3,7 @@ package com.example.PetnityServer.controller;
 import com.example.PetnityServer.data.dto.postDTO.CreatePostRequestDTO;
 import com.example.PetnityServer.data.dto.postDTO.CreatePostResponseDTO;
 import com.example.PetnityServer.data.dto.postDTO.PostDTO;
+import com.example.PetnityServer.data.dto.postDTO.ReadPostResponse;
 import com.example.PetnityServer.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +21,17 @@ public class PostController {
     public PostController(PostService postService){this.postService = postService;}
 
     @PostMapping
-    public ResponseEntity<PostDTO> createPost(@RequestBody CreatePostRequestDTO createPostRequestDTO){
-        PostDTO response = postService.createPost(createPostRequestDTO);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<CreatePostResponseDTO> createPost(@RequestBody CreatePostRequestDTO createPostRequestDTO){
+        CreatePostResponseDTO createPostResponseDTO = postService.createPost(createPostRequestDTO);
+        return ResponseEntity.ok(createPostResponseDTO);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<PostDTO> readPost(@PathVariable Long id) {
-        Optional<PostDTO> post = postService.readPost(id);
-        return post.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<ReadPostResponse> readPost(@PathVariable Long id) {
+        Optional<ReadPostResponse> readPostResponse = postService.readPost(id);
+        if (readPostResponse.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(readPostResponse.get());
     }
 
 

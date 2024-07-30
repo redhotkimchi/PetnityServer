@@ -1,7 +1,9 @@
 package com.example.PetnityServer.service.impl;
 
 import com.example.PetnityServer.data.dto.postDTO.CreatePostRequestDTO;
+import com.example.PetnityServer.data.dto.postDTO.CreatePostResponseDTO;
 import com.example.PetnityServer.data.dto.postDTO.PostDTO;
+import com.example.PetnityServer.data.dto.postDTO.ReadPostResponse;
 import com.example.PetnityServer.data.entity.Post;
 import com.example.PetnityServer.data.repository.PostRepository;
 import com.example.PetnityServer.service.PostService;
@@ -24,16 +26,32 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDTO createPost(CreatePostRequestDTO createPostRequestDTO) {
+    public CreatePostResponseDTO createPost(CreatePostRequestDTO createPostRequestDTO) {
         String password = createPostRequestDTO.getPassword();
-        Post post = postRepository.save(postConverter.convertToEntity(createPostRequestDTO.getPost()));
-        return postConverter.convertToDto(post);
+        Post post = postConverter.convertToEntity(createPostRequestDTO.getPost());
+        post.builder()
+                .password(password)
+                .build();
+        Post savedPost = postRepository.save(post);
+        CreatePostResponseDTO createPostResponseDTO = CreatePostResponseDTO.builder()
+                .post(postConverter.convertToDto(savedPost))
+                .build();
+        return createPostResponseDTO;
 
     }
 
     @Override
-    public Optional<PostDTO> readPost(long id) {
-        return Optional.ofNullable(postConverter.convertToDto(postRepository.getReferenceById(id)));
+    public Optional<ReadPostResponse> readPost(long id) {
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isEmpty()) {
+            return Optional.empty();
+        }
+        else {
+            return Optional.of(ReadPostResponse.builder()
+                    .post(postConverter.convertToDto(post.get()))
+                    .build());
+        }
+
     }
 
 }
