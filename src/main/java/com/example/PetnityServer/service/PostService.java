@@ -7,6 +7,6 @@ import com.example.PetnityServer.data.dto.postDTO.PostDTO;
 import java.util.Optional;
 
 public interface PostService {
-    CreatePostResponseDTO createPost(CreatePostRequestDTO createPostRequestDTO);
+    PostDTO createPost(CreatePostRequestDTO createPostRequestDTO);
     Optional<PostDTO> readPost(long id);
 }

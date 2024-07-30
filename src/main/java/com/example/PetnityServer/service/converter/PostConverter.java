@@ -1,14 +1,13 @@
 package com.example.PetnityServer.service.converter;
 
 import com.example.PetnityServer.data.dto.postDTO.CreatePostRequestDTO;
-import com.example.PetnityServer.data.dto.postDTO.CreatePostResponseDTO;
 import com.example.PetnityServer.data.dto.postDTO.PostDTO;
 import com.example.PetnityServer.data.entity.Post;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PostConverter {
-public static PostDTO toPostDTO(Post post) {
+    public static PostDTO convertToDto(Post post) {
         return PostDTO.builder()
                 .id(post.getId())
                 .title(post.getTitle())
@@ -22,7 +21,7 @@ public static PostDTO toPostDTO(Post post) {
                 .build();
     }
 
-    public static Post toPost(CreatePostRequestDTO createPostRequestDTO) {
+    public static Post convertToEntity(CreatePostRequestDTO createPostRequestDTO) {
         return Post.builder()
                 .title(createPostRequestDTO.getPost().getTitle())
                 .message(createPostRequestDTO.getPost().getMessage())
@@ -34,9 +33,4 @@ public static PostDTO toPostDTO(Post post) {
                 .build();
     }
 
-    public static CreatePostResponseDTO toCreatePostResponseDTO(Post post) {
-        return CreatePostResponseDTO.builder()
-                .post(toPostDTO(post))
-                .build();
-    }
 }

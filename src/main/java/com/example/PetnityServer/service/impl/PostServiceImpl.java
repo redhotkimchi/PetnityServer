@@ -1,7 +1,6 @@
 package com.example.PetnityServer.service.impl;
 
 import com.example.PetnityServer.data.dto.postDTO.CreatePostRequestDTO;
-import com.example.PetnityServer.data.dto.postDTO.CreatePostResponseDTO;
 import com.example.PetnityServer.data.dto.postDTO.PostDTO;
 import com.example.PetnityServer.data.entity.Post;
 import com.example.PetnityServer.data.repository.PostRepository;
@@ -25,15 +24,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public CreatePostResponseDTO createPost(CreatePostRequestDTO createPostRequestDTO) {
-        Post post = postRepository.save(postConverter.toPost(createPostRequestDTO));
-        return postConverter.toCreatePostResponseDTO(post);
+    public PostDTO createPost(CreatePostRequestDTO createPostRequestDTO) {
+        Post post = postRepository.save(postConverter.convertToEntity(createPostRequestDTO));
+        return postConverter.convertToDto(post);
 
     }
 
     @Override
     public Optional<PostDTO> readPost(long id) {
-        return Optional.ofNullable(postConverter.toPostDTO(postRepository.getReferenceById(id)));
+        return Optional.ofNullable(postConverter.convertToDto(postRepository.getReferenceById(id)));
     }
 
 }
