@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class CreatePostRequestDTO {
-    PostDTO postDTO;
+    PostDTO post;
     String password;
 }
