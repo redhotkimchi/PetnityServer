@@ -17,4 +17,20 @@ public class PostDTO {
     String message;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
+
+    toEntity(): Post {
+
+    }
+
+    static createPostDTO(from: Post): PostDTO {
+
+    }
 }
+
+
+1. DTO <----> ENTITY
+
+2. CONVERTER -> PostDTO
+
+        -> ENTITY
+
