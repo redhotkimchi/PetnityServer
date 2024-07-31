@@ -1,9 +1,6 @@
 package com.example.PetnityServer.controller;
 
-import com.example.PetnityServer.data.dto.postDTO.CreatePostRequestDTO;
-import com.example.PetnityServer.data.dto.postDTO.CreatePostResponseDTO;
-import com.example.PetnityServer.data.dto.postDTO.PostDTO;
-import com.example.PetnityServer.data.dto.postDTO.ReadPostResponse;
+import com.example.PetnityServer.data.dto.postDTO.*;
 import com.example.PetnityServer.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +10,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/posts")
-
 public class PostController {
     private PostService postService;
     @Autowired
-
     public PostController(PostService postService){this.postService = postService;}
 
     @PostMapping
@@ -33,6 +28,20 @@ public class PostController {
         }
         return ResponseEntity.ok(readPostResponse.get());
     }
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+        if (postService.deletePost(id)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdatePostResponse> updatePost(@PathVariable Long id, @RequestBody UpdatePostRequest updatePostRequest) {
+        Optional<UpdatePostResponse> updatePostResponse = postService.updatePost(id, updatePostRequest);
+        if (updatePostResponse.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatePostResponse.get());
+    }
 
 }

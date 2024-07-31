@@ -1,6 +1,5 @@
 package com.example.PetnityServer.service.converter;
 
-import com.example.PetnityServer.data.dto.postDTO.CreatePostRequestDTO;
 import com.example.PetnityServer.data.dto.postDTO.PostDTO;
 import com.example.PetnityServer.data.entity.Post;
 import org.springframework.stereotype.Component;
