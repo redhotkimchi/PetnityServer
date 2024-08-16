@@ -9,4 +9,5 @@ public interface PostService {
     Optional<ReadPostResponse> readPost(long id);
     boolean deletePost(long id);
     Optional<UpdatePostResponse> updatePost(long id, UpdatePostRequest updatePostRequest);
+    ListPostsResponseDTO listPosts(ListPostsRequestDTO listPostsRequestDTO);
 }

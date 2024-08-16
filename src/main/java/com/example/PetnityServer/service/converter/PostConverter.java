@@ -22,12 +22,15 @@ public class PostConverter {
 
     public static Post convertToEntity(PostDTO postDTO) {
         return Post.builder()
+                .id(postDTO.getId())
                 .title(postDTO.getTitle())
                 .message(postDTO.getMessage())
                 .dogAge(postDTO.getDogAge())
                 .dogName(postDTO.getDogName())
                 .location(postDTO.getLocation())
                 .nickname(postDTO.getNickname())
+                .password("")
+                .salt("")
                 .build();
     }
 

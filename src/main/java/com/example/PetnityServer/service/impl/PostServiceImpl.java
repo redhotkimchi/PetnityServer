@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +20,7 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
     private PostConverter postConverter;
 
+    @Autowired
     public PostServiceImpl(PostRepository postRepository, PostConverter postConverter){
         this.postRepository = postRepository;
         this.postConverter = postConverter;
@@ -26,10 +29,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public CreatePostResponseDTO createPost(CreatePostRequestDTO createPostRequestDTO) {
         String password = createPostRequestDTO.getPassword();
-        Post post = postConverter.convertToEntity(createPostRequestDTO.getPost());
-        post.builder()
-                .password(password)
-                .build();
+        PostDTO dto = createPostRequestDTO.getPost();
+        // clean up the ID
+        dto.setId(0);
+        Post post = postConverter.convertToEntity(dto);
+        post.setPassword(password);
+        post.setSalt("");
+
         Post savedPost = postRepository.save(post);
         CreatePostResponseDTO createPostResponseDTO = CreatePostResponseDTO.builder()
                 .post(postConverter.convertToDto(savedPost))
@@ -65,26 +71,34 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public Optional<UpdatePostResponse> updatePost(long id, UpdatePostRequest updatePostRequest) {
-        Optional<Post> postOptional = postRepository.findById(id);
-        if (postOptional.isEmpty()) {
-            return Optional.empty();
-        } else {
-            Post post = postOptional.get();
-            post.setTitle(updatePostRequest.getPost().getTitle());
-            post.setMessage(updatePostRequest.getPost().getMessage());
-            post.setDogAge(updatePostRequest.getPost().getDogAge());
-            post.setDogName(updatePostRequest.getPost().getDogName());
-            post.setLocation(updatePostRequest.getPost().getLocation());
-            post.setNickname(updatePostRequest.getPost().getNickname());
+        PostDTO dto = updatePostRequest.getPost();
+        // updated_at
+        dto.setId(id);
 
-            Post savedPost = postRepository.save(post);
+        Post post = postConverter.convertToEntity(dto);
+        // TODO : implement password / salt logic
+        post.setPassword("");
+        post.setSalt("");
+        postRepository.save(post);
+        // updated_at
 
+        Post updated = postRepository.findById(post.getId()).get();
 
-            return Optional.of(UpdatePostResponse.builder()
-                    .post(postConverter.convertToDto(savedPost))
-                    .build());
+        // post -> dto
+        PostDTO updatedDTO = postConverter.convertToDto(updated);
+        // return data
+        return Optional.of(UpdatePostResponse.builder().post(updatedDTO).build());
+    }
+
+    @Override
+    public ListPostsResponseDTO listPosts(ListPostsRequestDTO listPostsRequestDTO) {
+        List<Post> posts = postRepository.findAll();
+        List<PostDTO> postDTOs = new ArrayList<>();
+        for (Post post : posts) {
+            PostDTO postDTO = postConverter.convertToDto(post);
+            postDTOs.add(postDTO);
         }
-
+        return ListPostsResponseDTO.builder().posts(postDTOs).build();
     }
 
 }

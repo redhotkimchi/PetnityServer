@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class ListPostsRequestDTO {
     private int pageCount;
-    private int pageSize ;
+    private int pageSize;
     private String keyword;
 }
