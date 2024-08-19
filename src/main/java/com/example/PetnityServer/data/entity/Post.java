@@ -1,8 +1,7 @@
 package com.example.PetnityServer.data.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Builder
 @Getter
+@Setter
 //message, title columns are indexed
 @Table(name = "post",
         indexes = {@Index(name = "idx_title",  columnList="title"),
@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
                 }
 )
 //class name has been changed to Post
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post {
 
     @Id
@@ -48,16 +50,14 @@ public class Post {
     @Column(nullable = true, length = 50)
     private String location;
     //@CreationTimestamp annotation is used to update the created_at column
-    @Column(nullable = false)
     @CreationTimestamp
+    @Column( nullable = false, updatable = false)
     private LocalDateTime createdAt;
     //@UpdateTimestamp annotation is used to update the update_at column
-    @Column(nullable = false)
     @UpdateTimestamp
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     // Constructors, Getters, and Setters
 
-    public Post() {
-    }
 }

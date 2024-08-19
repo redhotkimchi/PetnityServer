@@ -1,6 +1,5 @@
 package com.example.PetnityServer.service.converter;
 
-import com.example.PetnityServer.data.dto.postDTO.CreatePostRequestDTO;
 import com.example.PetnityServer.data.dto.postDTO.PostDTO;
 import com.example.PetnityServer.data.entity.Post;
 import org.springframework.stereotype.Component;
@@ -23,12 +22,15 @@ public class PostConverter {
 
     public static Post convertToEntity(PostDTO postDTO) {
         return Post.builder()
+                .id(postDTO.getId())
                 .title(postDTO.getTitle())
                 .message(postDTO.getMessage())
                 .dogAge(postDTO.getDogAge())
                 .dogName(postDTO.getDogName())
                 .location(postDTO.getLocation())
                 .nickname(postDTO.getNickname())
+                .password("")
+                .salt("")
                 .build();
     }
 
