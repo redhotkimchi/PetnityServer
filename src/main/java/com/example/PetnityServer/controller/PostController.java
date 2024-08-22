@@ -45,9 +45,9 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<ListPostsResponseDTO> listPosts(@RequestParam ListPostsRequestDTO listPostsRequestDTO) {
+    public ResponseEntity<ListPostsResponseDTO> listPosts() {
         return  ResponseEntity.ok(
-                postService.listPosts(listPostsRequestDTO)
+                postService.listPosts()
         );
     }
 

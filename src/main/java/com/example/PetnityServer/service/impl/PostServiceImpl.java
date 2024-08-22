@@ -91,7 +91,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public ListPostsResponseDTO listPosts(ListPostsRequestDTO listPostsRequestDTO) {
+    public ListPostsResponseDTO listPosts() {
         List<Post> posts = postRepository.findAll();
         List<PostDTO> postDTOs = new ArrayList<>();
         for (Post post : posts) {
