@@ -15,10 +15,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@NoArgsConstructor
 public class PostServiceImpl implements PostService {
-    private PostRepository postRepository;
-    private PostConverter postConverter;
+    private final PostRepository postRepository;
+    private final PostConverter postConverter;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository, PostConverter postConverter){
@@ -71,6 +70,9 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public Optional<UpdatePostResponse> updatePost(long id, UpdatePostRequest updatePostRequest) {
+        if(!postRepository.existsById(id)){
+            return Optional.empty();
+        }
         PostDTO dto = updatePostRequest.getPost();
         // updated_at
         dto.setId(id);
@@ -79,10 +81,7 @@ public class PostServiceImpl implements PostService {
         // TODO : implement password / salt logic
         post.setPassword("");
         post.setSalt("");
-        postRepository.save(post);
-        // updated_at
-
-        Post updated = postRepository.findById(post.getId()).get();
+        Post updated = postRepository.save(post);
 
         // post -> dto
         PostDTO updatedDTO = postConverter.convertToDto(updated);

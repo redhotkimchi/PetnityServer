@@ -2,6 +2,8 @@ package com.example.PetnityServer.service.converter;
 
 import com.example.PetnityServer.data.dto.postDTO.PostDTO;
 import com.example.PetnityServer.data.entity.Post;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
